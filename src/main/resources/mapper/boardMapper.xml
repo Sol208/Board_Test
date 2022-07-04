@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board" >
+	<select id="boardSelectListAll" resultType="BoardDTO">
+		select * from board
+	</select>
+	
+	<insert id="boardInsert">
+		insert into board (postno, title, maintext, username, views, datetime) values (#{postno}, #{title}, to_clob(#{maintext}), #{pid}, 0, systimestamp)
+	</insert>
+	<select id="boardSelectOneByPostNo" parameterType="string" resultType="BoardDTO">
+		select * from board where postno=${value}
+	</select>
+	<update id="boardUpdateViews" parameterType="string" >
+		update board set views = views + 1 where postno='${value}'
+	</update>
+	<update id="boardUpdatePost" parameterType="string">
+		update board set title = #{title}, maintext = #{maintext} where postno=#{postno}
+	</update>
+	<delete id="boardDeletePost" parameterType="string">
+		delete from board where postno=${value}
+	</delete>
+</mapper>
