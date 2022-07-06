@@ -38,6 +38,14 @@ public class BoardController {
 					(request.getContextPath() + "/Board/").length());
 			System.out.println("serviceStr ====> " + serviceStr);
 			
+			int page = 1;
+			
+			if(request.getParameter("page")!=null) {
+				page = Integer.parseInt(request.getParameter("page"));
+			}
+			
+			request.setAttribute("nowPage", page);
+			
 			if(nonClass.contains(serviceStr)) {
 				request.setAttribute("mainUrl", "board/"+serviceStr);
 				return "template";

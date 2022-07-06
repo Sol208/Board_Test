@@ -22,4 +22,7 @@
 	<delete id="boardDeletePost" parameterType="string">
 		delete from board where postno=${value}
 	</delete>
+	<select id="boardSelectTotalCount" resultType="integer">
+		select count(*) from board
+	</select>
 </mapper>

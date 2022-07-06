@@ -29,3 +29,4 @@
 		</td>
 	</tr>
 </table>
+<button onClick="location.href='List'">뒤로가기</button>

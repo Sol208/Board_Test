@@ -3,6 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <hr />
+<button onClick="location.href='/prac'">뒤로가기</button>
+
 <button onClick="location.href='Insert'">글쓰기</button>
 <table border="">
 	<tr>
@@ -15,7 +17,7 @@
 	
 	<c:forEach var="dto" items="${mainData }" varStatus="no">
 		<tr>
-			<td>${dto.postNo}</td>
+			<td>${no.index+1}</td>
 			<td>
 				<a href="<c:url value="Detail?postNo=${dto.postNo }"/>">${dto.title }</a>
 			</td>
@@ -27,3 +29,20 @@
 		</tr>
 	</c:forEach>
 </table>
+<c:if test="${pageStart>1 }">
+				<a href="<c:url value="/Board/List?page=${pageStart-1 }"/>">[이전]</a>
+			</c:if>
+				<c:forEach var = "i" begin="${pageStart }" end = "${pageEnd }" step="1">
+					<c:choose>
+						<c:when test="${nowPage==i }">
+							${i }
+						</c:when>
+						<c:otherwise>
+							<a href="<c:url value="/Board/List?page=${i }"/>">${i }</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<c:if test="${pageEnd<pageTotal }">
+				<a href="<c:url value="/Board/List?page=${pageEnd+1 }"/>">[다음]</a>
+			</c:if>
+
